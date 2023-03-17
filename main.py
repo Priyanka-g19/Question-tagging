@@ -1,6 +1,9 @@
 import openai,os,json,yaml,sys
 from flask import Flask,request,jsonify,render_template
 from ratelimit import limits,sleep_and_retry
+from dotenv import load_dotenv
+
+
 #from logger import logging
 #from exception import customException
 
@@ -9,6 +12,10 @@ app=Flask(__name__)
 global config
 with open("app.yaml","r") as f:
     config= yaml.safe_load(f)
+
+
+def configure():
+    load_dotenv()
 
 
 @app.route("/")
@@ -31,7 +38,7 @@ def chat_gpt():
             #logging.info("Taking the prompt as Question from the user")
             prompt += request.args.get("prompt")
             print(prompt)
-            api_key = os.environ.get("API_KEY")
+            api_key = os.getenv('API_KEY')
 
             openai.api_key=api_key
             #logging.info("Running the chatgpt api")
