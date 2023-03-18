@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 
 app=Flask(__name__)
 global config
-with open("app.yaml","r") as f:
+with open("config.yaml","r") as f:
     config= yaml.safe_load(f)
 
 
