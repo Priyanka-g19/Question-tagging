@@ -4,6 +4,7 @@ from ratelimit import limits,sleep_and_retry
 from dotenv import load_dotenv
 
 
+
 #from logger import logging
 #from exception import customException
 
@@ -11,7 +12,7 @@ from dotenv import load_dotenv
 app=Flask(__name__)
 global config
 with open("config.yaml","r") as f:
-    config= yaml.safe_load(f)
+    config= yaml.full_load(f)
 
 
 def configure():
