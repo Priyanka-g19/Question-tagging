@@ -1,4 +1,4 @@
-import openai,os,json,yaml,sys
+import openai,os,json
 from flask import Flask,request,jsonify,render_template
 from ratelimit import limits,sleep_and_retry
 from dotenv import load_dotenv
@@ -9,9 +9,9 @@ from dotenv import load_dotenv
 
 
 app=Flask(__name__)
-global config
-with open("app.yaml","r") as f:
-    config= yaml.safe_load(f)
+#global config
+#with open("config.yaml","r") as f:
+#   config= yaml.safe_load(f)
 
 
 def configure():
@@ -23,9 +23,11 @@ def index():
     return render_template('index.html')
 
 # Define rate limiting parameters
-RATE_LIMIT = config["RATE_LIMIT"]  # maximum number of requests per minute
-RATE_PERIOD = config["RATE_PERIOD"]  # time period in seconds for rate limit
+#RATE_LIMIT = config["RATE_LIMIT"]  # maximum number of requests per minute
+#RATE_PERIOD = config["RATE_PERIOD"]  # time period in seconds for rate limit
 
+RATE_LIMIT =50
+RATE_PERIOD =60
 # Define rate limiter decorator
 @sleep_and_retry
 @limits(calls=RATE_LIMIT, period=RATE_PERIOD)
@@ -64,7 +66,7 @@ def chat_gpt():
             return jsonify(
                 ERROR = f"{e}"
             )
-        
+
 
 def  prepare_json(output):
     #logging.info("Entered the method to convert chatgpt text response to json response")
@@ -84,3 +86,4 @@ def  prepare_json(output):
 
 if __name__=="__main__":
     app.run(host="0.0.0.0",port=5000,debug=True)
+
