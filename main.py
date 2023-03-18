@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 import openai,os,json
+=======
+import openai,os,json,sys
+>>>>>>> a14fa9618b8b1e5736022a1f7d30fa9219f5085f
 from flask import Flask,request,jsonify,render_template
 from ratelimit import limits,sleep_and_retry
 from dotenv import load_dotenv
+
 
 
 #from logger import logging
@@ -11,7 +16,11 @@ from dotenv import load_dotenv
 app=Flask(__name__)
 #global config
 #with open("config.yaml","r") as f:
+<<<<<<< HEAD
 #   config= yaml.safe_load(f)
+=======
+#    config= yaml.full_load(f)
+>>>>>>> a14fa9618b8b1e5736022a1f7d30fa9219f5085f
 
 
 def configure():
@@ -25,6 +34,12 @@ def index():
 # Define rate limiting parameters
 #RATE_LIMIT = config["RATE_LIMIT"]  # maximum number of requests per minute
 #RATE_PERIOD = config["RATE_PERIOD"]  # time period in seconds for rate limit
+<<<<<<< HEAD
+=======
+RATE_LIMIT=50
+RATE_PERIOD=60
+
+>>>>>>> a14fa9618b8b1e5736022a1f7d30fa9219f5085f
 
 RATE_LIMIT =50
 RATE_PERIOD =60
