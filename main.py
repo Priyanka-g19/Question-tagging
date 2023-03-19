@@ -1,14 +1,4 @@
-<<<<<<< HEAD
-
 import openai,os,json
-
-=======
-<<<<<<< HEAD
-import openai,os,json
-=======
->>>>>>> 06e1008a82240ee9957b8ddb0d46e45c5dd0d61c
-import openai,os,json,sys
->>>>>>> a14fa9618b8b1e5736022a1f7d30fa9219f5085f
 from flask import Flask,request,jsonify,render_template
 from ratelimit import limits,sleep_and_retry
 from dotenv import load_dotenv
@@ -22,16 +12,8 @@ from dotenv import load_dotenv
 app=Flask(__name__)
 #global config
 #with open("config.yaml","r") as f:
-<<<<<<< HEAD
-
-#   config= yaml.safe_load(f)
-=======
-<<<<<<< HEAD
-#   config= yaml.safe_load(f)
-=======
->>>>>>> 06e1008a82240ee9957b8ddb0d46e45c5dd0d61c
 #    config= yaml.full_load(f)
->>>>>>> a14fa9618b8b1e5736022a1f7d30fa9219f5085f
+
 
 
 def configure():
@@ -45,23 +27,10 @@ def index():
 # Define rate limiting parameters
 #RATE_LIMIT = config["RATE_LIMIT"]  # maximum number of requests per minute
 #RATE_PERIOD = config["RATE_PERIOD"]  # time period in seconds for rate limit
-<<<<<<< HEAD
-
-
-RATE_LIMIT=50
-RATE_PERIOD=60
-
-=======
-<<<<<<< HEAD
-=======
-RATE_LIMIT=50
-RATE_PERIOD=60
-
->>>>>>> a14fa9618b8b1e5736022a1f7d30fa9219f5085f
 
 RATE_LIMIT =50
 RATE_PERIOD =60
->>>>>>> 06e1008a82240ee9957b8ddb0d46e45c5dd0d61c
+
 # Define rate limiter decorator
 @sleep_and_retry
 @limits(calls=RATE_LIMIT, period=RATE_PERIOD)
@@ -119,9 +88,4 @@ def  prepare_json(output):
 
 
 if __name__=="__main__":
-<<<<<<< HEAD
     app.run(host="0.0.0.0",port=5000,debug=False)
-=======
-    app.run(host="0.0.0.0",port=5000,debug=True)
-
->>>>>>> 06e1008a82240ee9957b8ddb0d46e45c5dd0d61c
