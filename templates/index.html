@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Flask template</title>
+        <meta charset="UTF-8">
+        <title>Question-tagging</title>
+        <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
     </head>
     <body>
         <form action="/chatgpt",method="post">
-            <input type="text" name="prompt" placeholder="prompt">
-            <input type="submit",class="btn btn-info",name="prompt">
+            <p>Get the subject, topic, Subtopic, difficulty level and blooms taxonomy of your question</p>
+            <br>
+            <br>
+            <h1>Enter your Question</h1>
+            <br>
+            <input type="text" name="prompt" placeholder="Question">
+            <br>
+            <input type="submit" class="btn btn-info" name="prompt" id='tagging'>
+            <br>
         </form>
-        {{output}}
+        <h2>{{output}}</h2>
+        
     </body>
 
 </html>
