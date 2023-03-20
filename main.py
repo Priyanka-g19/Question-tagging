@@ -1,4 +1,4 @@
-import openai,os,json
+import openai,os,json,yaml
 from flask import Flask,request,jsonify,render_template
 from ratelimit import limits,sleep_and_retry
 from dotenv import load_dotenv
@@ -10,9 +10,9 @@ from dotenv import load_dotenv
 
 
 app=Flask(__name__)
-#global config
-#with open("config.yaml","r") as f:
-#    config= yaml.full_load(f)
+global config
+with open("config.yaml","r") as f:
+    config= yaml.full_load(f)
 
 
 
@@ -25,11 +25,10 @@ def index():
     return render_template('index.html')
 
 # Define rate limiting parameters
-#RATE_LIMIT = config["RATE_LIMIT"]  # maximum number of requests per minute
-#RATE_PERIOD = config["RATE_PERIOD"]  # time period in seconds for rate limit
+RATE_LIMIT = config["RATE_LIMIT"]  # maximum number of requests per minute
+RATE_PERIOD = config["RATE_PERIOD"]  # time period in seconds for rate limit
 
-RATE_LIMIT =50
-RATE_PERIOD =60
+
 
 # Define rate limiter decorator
 @sleep_and_retry
@@ -39,7 +38,7 @@ def chat_gpt():
     #logging.info("Entered the chatgpt function")
     if request.method == "GET" or request.method == "POST":
         try:
-            prompt='Identify the subject, topic,subtopic,  difficulty level from [Easy, Medium, Hard],blooms taxonomy level for the question only. Q. '
+            prompt='Identify the subject, topic,subtopic,  difficulty level from [Easy, Medium, Hard],blooms taxonomy level for the given question only. Q. '
             #logging.info("Taking the prompt as Question from the user")
             prompt += request.args.get("prompt")
             print(prompt)
@@ -67,7 +66,7 @@ def chat_gpt():
             return render_template("index.html",output=prepare_json(text))
         except Exception as e:
             return jsonify(
-                ERROR = f"{e}"
+                ERROR = f"Enter a valid question"
             )
 
 
@@ -89,3 +88,4 @@ def  prepare_json(output):
 
 if __name__=="__main__":
     app.run(host="0.0.0.0",port=5000,debug=False)
+
